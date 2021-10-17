@@ -46,6 +46,7 @@ var BaseLayout = Class({
         this.rarity = this.scryfall.rarity;
         this.artist = this.scryfall.artist;
         this.colour_identity = this.scryfall.color_identity;
+        this.collector_number = this.scryfall.collector_number;
         this.keywords = [];
         if (this.scryfall.keywords !== undefined) {
             this.keywords = this.scryfall.keywords;

@@ -265,7 +265,16 @@ var NormalTemplate = Class({
 
         var noncreature_copyright = this.legal.layers.getByName(LayerNames.NONCREATURE_COPYRIGHT);
         var creature_copyright = this.legal.layers.getByName(LayerNames.CREATURE_COPYRIGHT);
-
+		
+		var collector_number = this.legal.layers.getByName(LayerNames.LEGAL);
+		this.text_layers = this.text_layers.concat([
+			new TextField(
+				layer = collector_number,
+				text_contents = this.layout.collector_number,
+				text_colour = get_text_layer_colour(collector_number),
+			)
+		]);
+			
         var power_toughness = text_and_icons.layers.getByName(LayerNames.POWER_TOUGHNESS);
         if (this.is_creature) {
             // creature card - set up creature layer for rules text and insert power & toughness
