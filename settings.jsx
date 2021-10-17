@@ -1,7 +1,7 @@
 #include "scripts/templates.jsx";
 
 // Expansion symbol - characters copied from Keyrune cheatsheet
-var expansion_symbol_character = "";  // Cube
+var expansion_symbol_character = ""; //"";  // Cube
 
 // Specify a template to use (if the card's layout is compatible) rather than the default template
 var specified_template = null;

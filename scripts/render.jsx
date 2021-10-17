@@ -36,6 +36,22 @@ function call_python(card_name, file_path) {
      * Returns the parsed JSON result if the Python call was successful, or raises an error if it wasn't.
      */
 
+	// Check if a custom data file exists on disk
+    var custom_json_path = file_path + "/custom/" + card_name + ".json"
+    var custom_json_file = new File(custom_json_path);
+	
+	if(custom_json_file.exists) {
+		custom_json_file.open('r');
+		var json_string = custom_json_file.read();
+		custom_json_file.close();
+		if (json_string === "") {
+			throw new Error(
+				"\n\nError getting custom json file for " + card_name + " (" + json_path + ")."
+			);
+		}
+		return JSON.parse(json_string);
+	}
+	
     // default to Windows command
     var python_command = "python \"" + file_path + "/scripts/get_card_info.py\" \"" + card_name + "\"";
     if ($.os.search(/windows/i) === -1) {
@@ -43,7 +59,7 @@ function call_python(card_name, file_path) {
         python_command = "/usr/local/bin/python3 \"" + file_path + "/scripts/get_card_info.py\" \"" + card_name + "\" >> " + file_path + "/scripts/debug.log 2>&1";
     }
     app.system(python_command);
-
+	
     var json_file = new File(file_path + json_file_path);
     json_file.open('r');
     var json_string = json_file.read();
