@@ -40,5 +40,10 @@ for p in root.findall('.//card'):
         "frame": "2015",
     }
     
+    stats = p.find('stats')
+    if stats:
+        data["power"] = stats.find("power").text
+        data["toughness"] = stats.find("toughness").text
+    
     with open("custom/" + "".join(x for x in name if x.isalnum()) + ".json", 'w') as outfile:
         json.dump(data, outfile, indent=4)
