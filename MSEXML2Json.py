@@ -42,8 +42,10 @@ for p in root.findall('.//card'):
     
     stats = p.find('stats')
     if stats:
-        data["power"] = stats.find("power").text
-        data["toughness"] = stats.find("toughness").text
+        if stats.find("power").text != None:
+            data["power"] = stats.find("power").text
+        if stats.find("toughness").text != None:
+            data["toughness"] = stats.find("toughness").text
     
     with open("custom/" + "".join(x for x in name if x.isalnum()) + ".json", 'w') as outfile:
         json.dump(data, outfile, indent=4)
